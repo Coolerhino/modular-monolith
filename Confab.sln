@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Bootstraper", "src\Bootstraper\Confab.Bootstraper\Confab.Bootstraper.csproj", "{BECDF751-F1E0-4DC6-AC2C-9C8413613DC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Bootstrapper", "src\Bootstraper\Confab.Bootstrapper\Confab.Bootstrapper.csproj", "{BECDF751-F1E0-4DC6-AC2C-9C8413613DC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7B1F9A92-693F-4A30-BCCC-15FF58027582}"
 EndProject

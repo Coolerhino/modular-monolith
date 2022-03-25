@@ -3,9 +3,11 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>Confab.Bootstraper</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Modules\Conferences\Confab.Modules.Conferences.Api\Confab.Modules.Conferences.Api.csproj" />
       <ProjectReference Include="..\..\Shared\Confab.Shared.Infrastructure\Confab.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
