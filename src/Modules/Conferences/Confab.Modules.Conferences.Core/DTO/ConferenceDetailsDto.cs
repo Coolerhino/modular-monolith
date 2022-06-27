@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Confab.Modules.Conferences.Core.DTO
 {
-    internal class HostDetailsDto : HostDto
+    internal class ConferenceDetailsDto : ConferenceDto
     {
         [Required]
         [StringLength(1000, MinimumLength = 3)]

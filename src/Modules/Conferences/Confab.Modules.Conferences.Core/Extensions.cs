@@ -13,8 +13,11 @@ namespace Confab.Modules.Conferences.Core
         {
             services.AddSingleton<IHostRepository, InMemoryHostRepository>();
             services.AddSingleton<IHostDeletionPolicy, HostDeletionPolicy>();
-            services.AddSingleton<IConferenceDeletionPolicy, ConferenceDeletionPolicy>();
             services.AddScoped<IHostService, HostService>();
+            
+            services.AddSingleton<IConferenceDeletionPolicy, ConferenceDeletionPolicy>();
+            services.AddSingleton<IConferenceRepository, InMemoryConferenceRepository>();
+            services.AddScoped<IConferenceService, ConferenceService>();            
             
             return services;
         }

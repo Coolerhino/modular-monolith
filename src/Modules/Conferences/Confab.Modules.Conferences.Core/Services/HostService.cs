@@ -21,7 +21,7 @@ namespace Confab.Modules.Conferences.Core.Services
             _hostDeletionPolicy = hostDeletionPolicy;
         }
 
-        public async Task AddAsync(HostDto dto)
+        public async Task AddAsync(HostDetailsDto dto)
         {
             dto.Id = Guid.NewGuid();
             await _hostRepository.AddAsync(new Host
@@ -35,24 +35,15 @@ namespace Confab.Modules.Conferences.Core.Services
         public async Task<HostDetailsDto> GetAsync(Guid id)
         {
             var host = await _hostRepository.GetAsync(id);
-            if (host is null)
-            {
-                return null;
-            }
-
-            var dto = Map<HostDetailsDto>(host);
-            dto.Conferences = host.Conferences.Select(x => new ConferenceDto()
-            {
-                Id = x.Id,
-                HostId = x.HostId,
-                HostName = x.Host.Name,
-                From = x.From,
-                To = x.To,
-                Location = x.Location,
-                ParticipantsLimit = x.ParticipantsLimit
-            }).ToList();
             
-            return dto;
+            return host is not null
+                ? new HostDetailsDto
+                {
+                    Id = host.Id,
+                    Name = host.Name,
+                    Description = host.Description
+                }
+                : default;
         }
 
         public async Task<IReadOnlyList<HostDto>> BrowseAsync()
@@ -95,8 +86,7 @@ namespace Confab.Modules.Conferences.Core.Services
             => new()
             {
                 Id = host.Id,
-                Description = host.Description,
-                Name = host.Name
+                Name = host.Name,
             };
     }
 }

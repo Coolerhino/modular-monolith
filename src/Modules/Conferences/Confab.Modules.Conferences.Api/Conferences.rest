@@ -1,0 +1,81 @@
+@url = http://localhost:5000/conferences-module
+@hostId = 3d921c74-0d14-4937-b2b1-2407f9825666
+@conferenceId = e3a3c56f-4e31-4f49-875b-1b9b77701c4d
+
+
+###
+GET {{url}}
+
+###
+POST {{url}}/hosts
+content-type: application/json
+
+{
+  "name": "Host 1",
+  "description": "Lorem ipsum"
+}
+
+###
+GET {{url}}/hosts 
+
+###
+GET {{url}}/hosts/{{hostId}}
+
+###
+PUT {{url}}/hosts
+content-type: application/json
+
+{
+  "name": "Host 2",
+  "description": "Lorem"
+}
+
+###
+DELETE {{url}}/hosts/{{hostId}}
+
+
+###
+GET {{url}}
+
+###
+POST {{url}}/conferences
+content-type: application/json
+
+{
+  "name": "conference 1",
+  "description": "Lorem ipsum"
+}
+
+###
+GET {{url}}/conferences
+
+###
+GET {{url}}/conferences/{{conferenceId}}
+
+### 
+POST {{url}}/conferences 
+content-Type: application/json
+
+{
+"hostId": "{{hostId}}",
+ "name": "Conference 1",
+  "location": "Test street 123",
+   "description": "Lorem ipsum",
+    "from": "2021-03-01",
+     "to": "2021-03-02"
+}
+
+### 
+PUT {{url}}/conferences/{{conferenceId}} 
+content-Type: application/json
+
+{
+"hostId": "{{hostId}}",
+ "name": "Conference 2",
+  "location": "Test street 123",
+   "description": "Lorem ipsum",
+    "from": "2021-03-01",
+     "to": "2021-03-02"
+}
+
+DELETE {{url}}/conferences/{{conferenceId}}

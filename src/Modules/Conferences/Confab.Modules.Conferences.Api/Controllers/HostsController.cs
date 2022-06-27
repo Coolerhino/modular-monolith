@@ -7,30 +7,39 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Conferences.Api.Controllers
 {
-    [Route(BasePath + "[controller]")]
-    internal class HostController : BaseController
+    //[Route(BasePath + "[controller]")]
+    internal class HostsController : BaseController
     {
         private readonly IHostService _hostService;
 
-        public HostController(IHostService hostService)
+        public HostsController(IHostService hostService)
         {
             _hostService = hostService;
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<HostDetailsDto>> GetAsync(Guid id) 
-            => OkOrNotFound(await _hostService.GetAsync(id));
-        
+        public async Task<ActionResult<HostDetailsDto>> Get(Guid id)
+        {
+            var host = await _hostService.GetAsync(id);
+            if (host is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(host);
+        }
+
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<HostDetailsDto>>> BrowseAsync(Guid id) => Ok(await _hostService.BrowseAsync());
-        
+        public async Task<ActionResult<IReadOnlyList<HostDetailsDto>>> BrowseAsync(Guid id) =>
+            Ok(await _hostService.BrowseAsync());
+
         [HttpPost]
-        public async Task<ActionResult> AddAsync(HostDto dto)
+        public async Task<ActionResult> AddAsync(HostDetailsDto dto)
         {
             await _hostService.AddAsync(dto);
-            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id }, null);
+            return CreatedAtAction(nameof(Get), new { id = dto.Id }, null);
         }
-        
+
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateAsync(Guid id, HostDetailsDto dto)
         {
@@ -38,7 +47,7 @@ namespace Confab.Modules.Conferences.Api.Controllers
             await _hostService.UpdateAsync(dto);
             return NoContent();
         }
-        
+
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> DeleteAsync(Guid id)
         {
