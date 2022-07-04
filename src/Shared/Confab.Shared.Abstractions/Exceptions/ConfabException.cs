@@ -6,7 +6,6 @@ namespace Confab.Shared.Abstractions.Exceptions
     {
         protected ConfabException(string message) : base(message)
         {
-            
         }
     }
 }
