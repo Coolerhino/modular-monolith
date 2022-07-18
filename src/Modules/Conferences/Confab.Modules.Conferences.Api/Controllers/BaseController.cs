@@ -3,12 +3,9 @@
 namespace Confab.Modules.Conferences.Api.Controllers
 {
     [ApiController]
-    //[Route(BasePath)]
-    [Route(BasePath + "/[controller]")]
+    [Route(ConferencesModule.BasePath + "/[controller]")]
     internal class BaseController : ControllerBase
     {
-        protected const string BasePath = "conferences-module";
-
         protected ActionResult<T> OkOrNotFound<T>(T model)
         {
             if (model is null)
@@ -16,7 +13,7 @@ namespace Confab.Modules.Conferences.Api.Controllers
                 return NotFound();
             }
 
-            return Ok();
+            return Ok(model);
         }
     }
 }
