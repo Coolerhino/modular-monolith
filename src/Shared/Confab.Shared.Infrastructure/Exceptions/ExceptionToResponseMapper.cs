@@ -13,7 +13,7 @@ namespace Confab.Shared.Infrastructure.Exceptions
         public ExceptionResponse Map(Exception exception)
             => exception switch
             {
-                ConfabException ex => new ExceptionResponse(new ErrorsResponse(new Error(GetErrorCode(ex), ex.Message)), HttpStatusCode.BadRequest),
+                CustomException ex => new ExceptionResponse(new ErrorsResponse(new Error(GetErrorCode(ex), ex.Message)), HttpStatusCode.BadRequest),
                 _ => new ExceptionResponse(new ErrorsResponse(new Error("error", "There was an error")),
                     HttpStatusCode.InternalServerError)
             };

@@ -3,7 +3,7 @@ using Confab.Shared.Abstractions.Exceptions;
 
 namespace Confab.Modules.Conferences.Core.Exceptions
 {
-    internal class HostNotFoundException : ConfabException
+    internal class HostNotFoundException : CustomException
     {
         public Guid Id { get; }
         public HostNotFoundException(Guid id) : base($"Host with ID: '{id}' was not found")
