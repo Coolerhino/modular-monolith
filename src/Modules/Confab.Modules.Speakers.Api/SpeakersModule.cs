@@ -15,11 +15,8 @@ namespace Confab.Modules.Speakers.Api
         public const string BasePath = "speakers-module";
         public string Name { get; } = "Speakers";
         public string Path => BasePath;
-
-        public IEnumerable<string> Policies { get; } = new[]
-        {
-            "speakers"
-        };
+        
+        public IEnumerable<string> Policies { get; } = new[] { "speakers" };
         public void Register(IServiceCollection services)
         {
             services.AddCore();

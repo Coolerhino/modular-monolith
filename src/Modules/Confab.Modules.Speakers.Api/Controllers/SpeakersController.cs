@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Confab.Modules.Speakers.Core.DTO;
 using Confab.Modules.Speakers.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Speakers.Api.Controllers
 {
+    [Authorize]
     internal class SpeakersController : BaseController
     {
+        private const string Policy = "speakers";
         private readonly ISpeakersService _speakersService;
 
         public SpeakersController(ISpeakersService service)
@@ -17,9 +20,11 @@ namespace Confab.Modules.Speakers.Api.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<SpeakerDto>> Get(Guid id) => OkOrNotFound(await _speakersService.GetAsync(id));
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<SpeakerDto>>> Get() => Ok(await _speakersService.BrowseAsync());
 
         [HttpPost]

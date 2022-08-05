@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Confab.Modules.Conferences.Core.Entities;
-using Confab.Shared.Abstractions;
+using Confab.Shared.Abstractions.Time;
 
 namespace Confab.Modules.Conferences.Core.Policies
 {
@@ -12,12 +12,12 @@ namespace Confab.Modules.Conferences.Core.Policies
         {
             _clock = clock;
         }
-        public async Task<bool> CanDeleteAsync(Conference conference)
+        public Task<bool> CanDeleteAsync(Conference conference)
         {
             //todo check participants if any
             var canDelete = _clock.CurrentDate().Date.AddDays(7) < conference.From.Date;
 
-            return canDelete;
+            return Task.FromResult(canDelete);
         }
     }
 }

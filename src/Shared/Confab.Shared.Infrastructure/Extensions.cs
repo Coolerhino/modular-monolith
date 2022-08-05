@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Confab.Shared.Abstractions;
 using Confab.Shared.Abstractions.Modules;
+using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
+using Confab.Shared.Infrastructure.Auth;
 using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Time;
@@ -39,6 +40,7 @@ namespace Confab.Shared.Infrastructure
                 }
             }
             
+            services.AddAuth(modules);
             services.AddErrorHandling();
             services.AddSingleton<IClock, UtcClock>();
             services.AddHostedService<AppInitializer>();

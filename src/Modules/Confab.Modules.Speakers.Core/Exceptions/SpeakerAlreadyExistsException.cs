@@ -3,7 +3,7 @@ using Confab.Shared.Abstractions.Exceptions;
 
 namespace Confab.Modules.Speakers.Core.Exceptions
 {
-    public class SpeakerAlreadyExistsException : CustomException
+    public class SpeakerAlreadyExistsException : ConfabException
     {
         public Guid Id { get; }
 

@@ -1,23 +1,27 @@
 ﻿using System.Collections.Generic;
-using Confab.Modules.Conferences.Core;
+using Confab.Modules.Users.Core;
 using Confab.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Confab.Modules.Conferences.Api
+namespace Confab.Modules.Users.Api
 {
-    internal class ConferencesModule : IModule
+    internal class UsersModule : IModule
     {
-        public const string BasePath = "conferences-module";
-        public string Name { get; } = "Conferences";
+        public const string BasePath = "users-module";        
+        public string Name { get; } = "Users";
         public string Path => BasePath;
+        
+        public IEnumerable<string> Policies { get; } = new[]
+        {
+            "users"
+        };
 
-        public IEnumerable<string> Policies { get; } = new[] { "conferences", "hosts" };
         public void Register(IServiceCollection services)
         {
             services.AddCore();
         }
-
+        
         public void Use(IApplicationBuilder app)
         {
         }

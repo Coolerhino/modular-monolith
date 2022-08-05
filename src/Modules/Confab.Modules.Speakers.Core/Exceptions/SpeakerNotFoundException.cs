@@ -3,7 +3,7 @@ using Confab.Shared.Abstractions.Exceptions;
 
 namespace Confab.Modules.Speakers.Core.Exceptions
 {
-    public class SpeakerNotFoundException : CustomException
+    public class SpeakerNotFoundException : ConfabException
     {
         public Guid Id { get; }
 
