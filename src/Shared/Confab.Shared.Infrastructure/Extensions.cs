@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Confab.Shared.Abstractions.Contexts;
 using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
 using Confab.Shared.Infrastructure.Auth;
+using Confab.Shared.Infrastructure.Contexts;
 using Confab.Shared.Infrastructure.Exceptions;
+using Confab.Shared.Infrastructure.Modules;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Time;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,6 +66,11 @@ namespace Confab.Shared.Infrastructure
                     Version = "v1"
                 });
             });
+
+            services.AddSingleton<IContextFactory, ContextFactory>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IContext>(sp => sp.GetRequiredService<IContextFactory>().Create());
+            services.AddModuleInfo(modules);
             services.AddAuth(modules);
             services.AddErrorHandling();
             services.AddSingleton<IClock, UtcClock>();
