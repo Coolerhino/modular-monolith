@@ -1,6 +1,7 @@
 @url = http://localhost:5000/conferences-module
 @hostId = 33d2c2d3-bec7-462f-a677-b659c3a25bba
 @conferenceId = e3a3c56f-4e31-4f49-875b-1b9b77701c4d
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNGFjODRjMS1jZTQyLTQyYmYtODUzMi0xOGJkZGIxZmIxMDUiLCJ1bmlxdWVfbmFtZSI6ImY0YWM4NGMxLWNlNDItNDJiZi04NTMyLTE4YmRkYjFmYjEwNSIsImp0aSI6IjI5NTAzMTk0LWJmYTMtNDNjNS05YThiLTc4MmI4ZjZkMjU4NCIsImlhdCI6IjE2NzA1Mjk5NzYxMTgiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidGlja2V0cyIsInVzZXJzIl0sIm5iZiI6MTY3MDUyOTk3NiwiZXhwIjoxNjcwNTY1OTc2LCJpc3MiOiJjb25mYWIifQ.dBB71s6qftWkpz7Um8kKHqrICXuglymsd9_JmLE7Bi0
 
 
 ###
@@ -23,6 +24,7 @@ GET {{url}}/hosts/{{hostId}}
 
 ###
 PUT {{url}}/hosts
+Authorization: Bearer {{accessToken}}
 content-type: application/json
 
 {
@@ -39,6 +41,7 @@ GET {{url}}
 
 ###
 POST {{url}}/conferences
+Authorization: Bearer {{accessToken}}
 content-type: application/json
 
 {
@@ -54,19 +57,23 @@ GET {{url}}/conferences/{{conferenceId}}
 
 ### 
 POST {{url}}/conferences 
+Authorization: Bearer {{accessToken}}
 content-Type: application/json
 
 {
-"hostId": "{{hostId}}",
- "name": "Conference 1",
+  "hostId": "{{hostId}}",
+  "name": "Conference 1",
   "location": "Test street 123",
-   "description": "Lorem ipsum",
-    "from": "2021-03-01",
-     "to": "2021-03-02"
+  "description": "Lorem ipsum",
+  "from": "2021-03-01",
+  "to": "2021-03-02",
+  "participantsLimit": 100,
+  "logoUrl": null
 }
 
 ### 
 PUT {{url}}/conferences/{{conferenceId}} 
+Authorization: Bearer {{accessToken}}
 content-Type: application/json
 
 {
