@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Confab.Shared.Abstractions.Events;
 using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Infrastructure.Events;
 using Microsoft.AspNetCore.Builder;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Confab.Shared.Abstractions.Events;
 using Confab.Shared.Infrastructure.Events;
 
 namespace Confab.Modules.Tickets.Core.Events.External

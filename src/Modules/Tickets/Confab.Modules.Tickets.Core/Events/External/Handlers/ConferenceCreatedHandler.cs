@@ -2,6 +2,7 @@
 using Confab.Modules.Conferences.Messages.Events;
 using Confab.Modules.Tickets.Core.Entities;
 using Confab.Modules.Tickets.Core.Repositories;
+using Confab.Shared.Abstractions.Events;
 using Confab.Shared.Infrastructure.Events;
 using Microsoft.Extensions.Logging;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Confab.Shared.Abstractions.Events;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Confab.Shared.Infrastructure.Events

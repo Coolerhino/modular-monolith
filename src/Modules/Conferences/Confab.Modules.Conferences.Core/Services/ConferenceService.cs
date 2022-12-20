@@ -8,6 +8,7 @@ using Confab.Modules.Conferences.Core.Exceptions;
 using Confab.Modules.Conferences.Core.Policies;
 using Confab.Modules.Conferences.Core.Repositories;
 using Confab.Modules.Conferences.Messages.Events;
+using Confab.Shared.Abstractions.Messaging;
 using Confab.Shared.Infrastructure.Events;
 using Confab.Shared.Infrastructure.Modules;
 
@@ -18,14 +19,14 @@ namespace Confab.Modules.Conferences.Core.Services
         private readonly IConferenceRepository _conferenceRepository;
         private readonly IHostRepository _hostRepository;
         private readonly IConferenceDeletionPolicy _conferenceDeletionPolicy;
-        private readonly IModuleClient _moduleClient;
+        private readonly IMessageBroker _messageBroker;
 
-        public ConferenceService(IConferenceRepository conferenceRepository, IHostRepository hostRepository, IConferenceDeletionPolicy conferenceDeletionPolicy, IModuleClient moduleClient)
+        public ConferenceService(IConferenceRepository conferenceRepository, IHostRepository hostRepository, IConferenceDeletionPolicy conferenceDeletionPolicy, IMessageBroker messageBroker)
         {
             _conferenceRepository = conferenceRepository;
             _hostRepository = hostRepository;
             _conferenceDeletionPolicy = conferenceDeletionPolicy;
-            _moduleClient = moduleClient;
+            _messageBroker = messageBroker;
         }
 
         public async Task AddAsync(ConferenceDetailsDto dto)
@@ -49,7 +50,7 @@ namespace Confab.Modules.Conferences.Core.Services
                 ParticipantsLimit = dto.ParticipantsLimit
             };
             await _conferenceRepository.AddAsync(conference);
-            await _moduleClient.PublishAsync(new ConferenceCreated(conference.Id, conference.Name,
+            await _messageBroker.PublishAsync(new ConferenceCreated(conference.Id, conference.Name,
                 conference.ParticipantsLimit, conference.From, conference.To));
         }
 

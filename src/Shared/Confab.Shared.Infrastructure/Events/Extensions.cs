@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Confab.Shared.Abstractions.Events;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Confab.Shared.Infrastructure.Events

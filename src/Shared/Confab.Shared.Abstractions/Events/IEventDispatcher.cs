@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Confab.Shared.Infrastructure.Events
+namespace Confab.Shared.Abstractions.Events
 {
     public interface IEventDispatcher
     {

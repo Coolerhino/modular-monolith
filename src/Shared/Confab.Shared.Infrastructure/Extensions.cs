@@ -11,6 +11,7 @@ using Confab.Shared.Infrastructure.Auth;
 using Confab.Shared.Infrastructure.Contexts;
 using Confab.Shared.Infrastructure.Events;
 using Confab.Shared.Infrastructure.Exceptions;
+using Confab.Shared.Infrastructure.Messaging;
 using Confab.Shared.Infrastructure.Modules;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Time;
@@ -75,7 +76,8 @@ namespace Confab.Shared.Infrastructure
             services.AddModuleRequests(assemblies);
             services.AddAuth(modules);
             services.AddErrorHandling();
-            services.AddEvents(assemblies);
+            services.AddEvents(assemblies); 
+            services.AddMessaging();
             services.AddSingleton<IClock, UtcClock>();
             services.AddHostedService<AppInitializer>();
             services.AddControllers()

@@ -1,5 +1,5 @@
 ﻿using System;
-using Confab.Shared.Infrastructure.Events;
+using Confab.Shared.Abstractions.Events;
 
 namespace Confab.Modules.Conferences.Messages.Events
 {
