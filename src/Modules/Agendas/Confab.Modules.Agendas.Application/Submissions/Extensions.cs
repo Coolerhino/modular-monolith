@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Confab.Modules.Agendas.Application
+namespace Confab.Modules.Agendas.Application.Submissions
 {
     public static class Extensions
     {

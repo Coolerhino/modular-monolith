@@ -1,4 +1,4 @@
-﻿using Confab.Modules.Agendas.Application;
+﻿using Confab.Modules.Agendas.Application.Submissions;
 using Confab.Modules.Agendas.Domain;
 using Confab.Modules.Agendas.Infrastructure;
 using Confab.Shared.Abstractions.Modules;
