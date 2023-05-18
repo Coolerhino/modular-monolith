@@ -8,9 +8,9 @@ namespace Confab.Shared.Abstractions.Kernel.Types
         public T Id { get; protected set; }
         public int Version { get; protected set; }
         public IEnumerable<IDomainEvent> Events => _events;
-        private bool _versionIncremented;
         
         private List<IDomainEvent> _events = new();
+        private bool _versionIncremented;
 
         protected void AddEvent(IDomainEvent @event)
         {
