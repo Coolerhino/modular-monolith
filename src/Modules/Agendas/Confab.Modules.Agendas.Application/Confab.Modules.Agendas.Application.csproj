@@ -8,4 +8,16 @@
       <ProjectReference Include="..\Confab.Modules.Agendas.Domain\Confab.Modules.Agendas.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Agendas\Handlers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Agendas\Handlers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Agendas\Handlers\**" />
+    </ItemGroup>
+
 </Project>

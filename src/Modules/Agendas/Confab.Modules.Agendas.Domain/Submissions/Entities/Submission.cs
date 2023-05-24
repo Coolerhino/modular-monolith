@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Confab.Modules.Agendas.Domain.Events;
 using Confab.Modules.Agendas.Domain.Submissions.Consts;
+using Confab.Modules.Agendas.Domain.Submissions.Events;
 using Confab.Modules.Agendas.Domain.Submissions.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
 
