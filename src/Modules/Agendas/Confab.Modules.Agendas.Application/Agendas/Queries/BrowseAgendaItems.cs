@@ -9,20 +9,4 @@ namespace Confab.Modules.Agendas.Application.Agendas.Queries
     {
         public Guid ConferenceId { get; set; }
     }
-    public class GetAgenda : IQuery<IEnumerable<AgendaTrackDto>>
-    {
-        public Guid ConferenceId { get; set; }
-    }
-    public class GetAgendaItem : IQuery<AgendaItemDto>
-    {
-        public Guid Id { get; set; }
-    }
-    public class GetAgendaTrack : IQuery<AgendaTrackDto>
-    {
-        public Guid Id { get; set; }
-    }
-    public class GetRegularAgendaSlot : IQuery<RegularAgendaSlotDto>
-    {
-        public Guid AgendaItemId { get; set; }
-    }
 }

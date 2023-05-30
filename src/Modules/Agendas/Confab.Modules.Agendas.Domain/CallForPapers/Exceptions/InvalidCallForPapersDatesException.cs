@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Confab.Shared.Abstractions.Exceptions;
 
 namespace Confab.Modules.Agendas.Domain.CallForPapers.Exceptions

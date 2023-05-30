@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Confab.Modules.Agendas.Domain.Submissions.Consts;
 using Confab.Modules.Agendas.Domain.Submissions.Events;
@@ -11,15 +10,18 @@ namespace Confab.Modules.Agendas.Domain.Submissions.Entities
     public sealed class Submission : AggregateRoot
     {
         public ConferenceId ConferenceId { get; private set; }
-        public string Title { get; private set; }
-        public string Description { get; private set; }
+        public string  Title { get; private set; }
+        public string  Description { get; private set; }
         public int Level { get; private set; }
         public string Status { get; private set; }
         public IEnumerable<string> Tags { get; private set; }
         public IEnumerable<Speaker> Speakers => _speakers;
-        private ICollection<Speaker> _speakers;
 
-        public Submission(AggregateId id, ConferenceId conferenceId, string title, string description, int level, string status, IEnumerable<string> tags, ICollection<Speaker> speakers, int version = 0)
+        private ICollection<Speaker> _speakers;
+        
+        public Submission(AggregateId id, ConferenceId conferenceId, string title, string description, int level, 
+            string status, IEnumerable<string> tags, ICollection<Speaker> speakers, int version = 0)
+            : this(id, conferenceId)
         {
             ConferenceId = conferenceId;
             Title = title;
@@ -31,12 +33,13 @@ namespace Confab.Modules.Agendas.Domain.Submissions.Entities
             Version = version;
         }
 
-        public Submission(AggregateId id, ConferenceId conferenceId) => (Id, ConferenceId) = (id, conferenceId);
+        public Submission(AggregateId id, ConferenceId conferenceId)
+            => (Id, ConferenceId) = (id, conferenceId);
 
-        public static Submission Create(AggregateId id, ConferenceId conferenceId, string title, string description, int level, IEnumerable<string> tags, ICollection<Speaker> speakers)
+        public static Submission Create(AggregateId id, ConferenceId conferenceId, string title, string description,
+            int level, IEnumerable<string> tags, IEnumerable<Speaker> speakers)
         {
             var submission = new Submission(id, conferenceId);
-
             submission.ChangeTitle(title);
             submission.ChangeDescription(description);
             submission.ChangeLevel(level);
@@ -72,18 +75,18 @@ namespace Confab.Modules.Agendas.Domain.Submissions.Entities
             Description = description;
             IncrementVersion();
         }
-        
+
         public void ChangeLevel(int level)
         {
-            if (!IsNotInRange())
+            if (IsNotInRange())
             {
                 throw new InvalidSubmissionLevelException(Id);
             }
-            
+
             Level = level;
             IncrementVersion();
             
-            bool IsNotInRange() => level is < 1 or > 6;
+            bool IsNotInRange() => level < 1 || level > 6;
         }
 
         public void ChangeSpeakers(IEnumerable<Speaker> speakers)
@@ -109,7 +112,7 @@ namespace Confab.Modules.Agendas.Domain.Submissions.Entities
             {
                 throw new InvalidSubmissionStatusException(Id, status, invalidStatus);
             }
-
+            
             Status = status;
             AddEvent(new SubmissionStatusChanged(this, status));
         }

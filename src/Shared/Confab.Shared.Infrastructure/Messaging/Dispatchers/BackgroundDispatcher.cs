@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Infrastructure.Modules;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

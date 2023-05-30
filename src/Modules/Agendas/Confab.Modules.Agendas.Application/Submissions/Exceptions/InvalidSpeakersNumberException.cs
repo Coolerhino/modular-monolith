@@ -7,8 +7,8 @@ namespace Confab.Modules.Agendas.Application.Submissions.Exceptions
     {
         public Guid SubmissionId { get; }
 
-        public InvalidSpeakersNumberException(Guid submissionId) : base(
-            $"Submission with ID: '{submissionId}' has invalid number of speakers")
+        public InvalidSpeakersNumberException(Guid submissionId) 
+            : base($"Submission with ID: '{submissionId}' has invalid number of speakers.")
             => SubmissionId = submissionId;
     }
 }

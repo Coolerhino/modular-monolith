@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Confab.Modules.Agendas.Application.CallForPapers.Exceptions;
-using Confab.Modules.Agendas.Application.Services;
-using Confab.Modules.Agendas.Application.Submissions.Exceptions;
+using Confab.Modules.Agendas.Application.Submissions.Services;
 using Confab.Modules.Agendas.Domain.CallForPapers.Repositories;
 using Confab.Modules.Agendas.Domain.Submissions.Entities;
+using Confab.Modules.Agendas.Domain.Submissions.Exceptions;
 using Confab.Modules.Agendas.Domain.Submissions.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Kernel;
@@ -13,23 +13,25 @@ using Confab.Shared.Abstractions.Messaging;
 
 namespace Confab.Modules.Agendas.Application.Submissions.Commands.Handlers
 {
-    public sealed class CreateSubmissionHandler : ICommandHandler<CreateSubmission>
+    internal sealed class CreateSubmissionHandler : ICommandHandler<CreateSubmission>
     {
-        private readonly ISubmissionRepository _submissionRepository;
         private readonly ISpeakerRepository _speakerRepository;
+        private readonly ISubmissionRepository _submissionRepository;
         private readonly ICallForPapersRepository _callForPapersRepository;
         private readonly IDomainEventDispatcher _dispatcher;
-        private readonly IEventMapper _eventMapper;
         private readonly IMessageBroker _messageBroker;
+        private readonly IEventMapper _eventMapper;
 
-        public CreateSubmissionHandler(ISubmissionRepository submissionRepository, ISpeakerRepository speakerRepository, IDomainEventDispatcher dispatcher, IEventMapper eventMapper, IMessageBroker messageBroker, ICallForPapersRepository callForPapersRepository)
+        public CreateSubmissionHandler(ISpeakerRepository speakerRepository, ISubmissionRepository submissionRepository,
+            ICallForPapersRepository callForPapersRepository, IDomainEventDispatcher dispatcher,
+            IMessageBroker messageBroker, IEventMapper eventMapper)
         {
-            _submissionRepository = submissionRepository;
             _speakerRepository = speakerRepository;
-            _dispatcher = dispatcher;
-            _eventMapper = eventMapper;
-            _messageBroker = messageBroker;
+            _submissionRepository = submissionRepository;
             _callForPapersRepository = callForPapersRepository;
+            _dispatcher = dispatcher;
+            _messageBroker = messageBroker;
+            _eventMapper = eventMapper;
         }
 
         public async Task HandleAsync(CreateSubmission command)
@@ -45,17 +47,17 @@ namespace Confab.Modules.Agendas.Application.Submissions.Commands.Handlers
                 throw new CallForPapersClosedException(command.ConferenceId);
             }
             
-            var speakerIds = command.SpeakerIds.Select(x => new AggregateId(x));
+            var speakerIds = command.SpeakerIds.Select(id => new AggregateId(id));
             var speakers = await _speakerRepository.BrowseAsync(speakerIds);
 
-            if (speakers.Count() != speakerIds.Count())
+            if (speakers.Count() != command.SpeakerIds.Count())
             {
-                throw new InvalidSpeakersNumberException(command.Id);
+                throw new MissingSubmissionSpeakersException(command.Id);
             }
-
-            var submission = Submission.Create(command.Id, command.ConferenceId, command.Title, command.Description,
-                command.Level, command.Tags, speakers.ToList());
-
+            
+            var submission = Submission.Create(command.Id, command.ConferenceId, command.Title, command.Description, 
+                command.Level, command.Tags, speakers);
+            
             await _submissionRepository.AddAsync(submission);
             await _dispatcher.DispatchAsync(submission.Events.ToArray());
             

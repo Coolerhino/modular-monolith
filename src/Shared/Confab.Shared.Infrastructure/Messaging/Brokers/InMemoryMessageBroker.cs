@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Confab.Shared.Abstractions.Messaging;
+using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Infrastructure.Messaging.Dispatchers;
 using Confab.Shared.Infrastructure.Modules;
 

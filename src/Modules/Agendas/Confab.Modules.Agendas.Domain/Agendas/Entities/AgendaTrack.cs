@@ -92,7 +92,7 @@ namespace Confab.Modules.Agendas.Domain.Agendas.Entities
         internal void ChangeSlotAgendaItem(EntityId id, AgendaItem agendaItemId)
         {
             var slot = _slots.FirstOrDefault(s => s.Id == id);
- 
+
             if (slot is null)
             {
                 throw new AgendaSlotNotFoundException(id);
