@@ -16,8 +16,8 @@ namespace Confab.Modules.Attendances.Infrastructure
                 .AddSingleton<IAgendasApiClient, AgendasApiClient>()
                 .AddScoped<IAttendableEventsRepository, AttendableEventsRepository>()
                 .AddScoped<IParticipantsRepository, ParticipantsRepository>()
-                .AddPostgres<AttendancesDbContext>();
-                // .AddUnitOfWork<IAttendancesUnitOfWork, AttendancesUnitOfWork>();
+                .AddPostgres<AttendancesDbContext>()
+                .AddUnitOfWork<IAttendancesUnitOfWork, AttendancesUnitOfWork>();
 
             return services;
         }

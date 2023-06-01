@@ -12,8 +12,8 @@ namespace Confab.Shared.Infrastructure.Kernel
         {
             services.AddSingleton<IDomainEventDispatcher, DomainEventDispatcher>();
             services.Scan(s => s.FromAssemblies(assemblies)
-                .AddClasses(c => c.AssignableTo(typeof(IDomainEventHandler<>)))
-                    //.WithoutAttribute<DecoratorAttribute>())
+                .AddClasses(c => c.AssignableTo(typeof(IDomainEventHandler<>))
+                    .WithoutAttribute<DecoratorAttribute>())
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
             return services;

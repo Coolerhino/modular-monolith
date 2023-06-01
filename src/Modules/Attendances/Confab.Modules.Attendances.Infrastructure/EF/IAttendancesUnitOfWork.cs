@@ -2,7 +2,7 @@
 
 namespace Confab.Modules.Attendances.Infrastructure.EF
 {
-    // internal interface IAttendancesUnitOfWork : IUnitOfWork
-    // {
-    // }
+    internal interface IAttendancesUnitOfWork : IUnitOfWork
+    {
+    }
 }

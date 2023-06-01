@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.Infrastructure", "src\Modules\Attendances\Confab.Modules.Attendances.Infrastructure\Confab.Modules.Attendances.Infrastructure.csproj", "{28185E72-260D-40A9-848D-F0EED1780C14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.Tests.Unit", "tests\Modules\Attendances\Confab.Modules.Attendances.Tests.Unit\Confab.Modules.Attendances.Tests.Unit.csproj", "{2411BF0A-0E07-420F-93CA-F5988E6EEE29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -318,6 +320,18 @@ Global
 		{28185E72-260D-40A9-848D-F0EED1780C14}.Release|x64.Build.0 = Release|Any CPU
 		{28185E72-260D-40A9-848D-F0EED1780C14}.Release|x86.ActiveCfg = Release|Any CPU
 		{28185E72-260D-40A9-848D-F0EED1780C14}.Release|x86.Build.0 = Release|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Debug|x64.Build.0 = Debug|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Debug|x86.Build.0 = Debug|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Release|x64.ActiveCfg = Release|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Release|x64.Build.0 = Release|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Release|x86.ActiveCfg = Release|Any CPU
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CAE907CD-DAC0-4B8F-879E-79DA8935E057} = {7B1F9A92-693F-4A30-BCCC-15FF58027582}
@@ -349,5 +363,6 @@ Global
 		{0B36F92D-F2CB-4EC0-A91E-8B740556869F} = {B7443D1D-AAAB-4656-8729-326A9316EEF9}
 		{B0188DD3-AFB5-41FA-A3B4-8F5B8122A9C5} = {B7443D1D-AAAB-4656-8729-326A9316EEF9}
 		{28185E72-260D-40A9-848D-F0EED1780C14} = {B7443D1D-AAAB-4656-8729-326A9316EEF9}
+		{2411BF0A-0E07-420F-93CA-F5988E6EEE29} = {B7443D1D-AAAB-4656-8729-326A9316EEF9}
 	EndGlobalSection
 EndGlobal

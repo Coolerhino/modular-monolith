@@ -15,6 +15,7 @@ using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Kernel;
 using Confab.Shared.Infrastructure.Messaging;
 using Confab.Shared.Infrastructure.Modules;
+using Confab.Shared.Infrastructure.Postgres;
 using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Time;
@@ -71,10 +72,11 @@ namespace Confab.Shared.Infrastructure
                     Version = "v1"
                 });
             });
-
+            
+            services.AddMemoryCache();
             services.AddSingleton<IContextFactory, ContextFactory>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<IContext>(sp => sp.GetRequiredService<IContextFactory>().Create());
+            services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
             services.AddModuleInfo(modules);
             services.AddModuleRequests(assemblies);
             services.AddAuth(modules);
@@ -84,6 +86,7 @@ namespace Confab.Shared.Infrastructure
             services.AddDomainEvents(assemblies);
             services.AddEvents(assemblies); 
             services.AddMessaging();
+            services.AddTransactionalDecorators();
             services.AddSingleton<IClock, UtcClock>();
             services.AddHostedService<AppInitializer>();
             services.AddControllers()
@@ -137,6 +140,21 @@ namespace Confab.Shared.Infrastructure
             var options = new T();
             configuration.GetSection(sectionName).Bind(options);
             return options;
+        }
+        
+        public static string GetModuleName(this object value)
+            => value?.GetType().GetModuleName() ?? string.Empty;
+
+        public static string GetModuleName(this Type type)
+        {
+            if (type?.Namespace is null)
+            {
+                return string.Empty;
+            }
+
+            return type.Namespace.StartsWith("Confab.Modules.")
+                ? type.Namespace.Split(".")[2].ToLowerInvariant()
+                : string.Empty;
         }
     }
 }
