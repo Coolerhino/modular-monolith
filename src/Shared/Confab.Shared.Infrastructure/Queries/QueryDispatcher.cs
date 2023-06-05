@@ -10,9 +10,7 @@ namespace Confab.Shared.Infrastructure.Queries
         private readonly IServiceProvider _serviceProvider;
 
         public QueryDispatcher(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+            => _serviceProvider = serviceProvider;
 
         public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
         {
@@ -20,9 +18,9 @@ namespace Confab.Shared.Infrastructure.Queries
             var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
             var handler = scope.ServiceProvider.GetRequiredService(handlerType);
 
-            return await (Task<TResult>)handlerType
+            return await (Task<TResult>) handlerType
                 .GetMethod(nameof(IQueryHandler<IQuery<TResult>, TResult>.HandleAsync))
-                ?.Invoke(handler, new[] { query });
+                ?.Invoke(handler, new[] {query});
         }
     }
 }

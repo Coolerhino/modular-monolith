@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Repositories
 {
-   public class SpeakerRepository : ISpeakerRepository
+    internal sealed class SpeakerRepository : ISpeakerRepository
     {
         private readonly AgendasDbContext _context;
         private readonly DbSet<Speaker> _speakers;

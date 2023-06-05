@@ -1,4 +1,5 @@
-﻿using Confab.Shared.Infrastructure.Api;
+﻿using System;
+using Confab.Shared.Infrastructure.Api;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Agendas.Api.Controllers
@@ -17,5 +18,8 @@ namespace Confab.Modules.Agendas.Api.Controllers
 
             return Ok(model);
         }
+        
+        protected void AddResourceIdHeader(Guid id) => Response.Headers.Add("Resource-ID", id.ToString());
+        
     }
 }

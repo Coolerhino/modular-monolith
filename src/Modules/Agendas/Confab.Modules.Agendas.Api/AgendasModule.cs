@@ -1,4 +1,5 @@
-﻿using Confab.Modules.Agendas.Application.Agendas.DTO;
+﻿using System.Collections.Generic;
+using Confab.Modules.Agendas.Application.Agendas.DTO;
 using Confab.Modules.Agendas.Application.Agendas.Queries;
 using Confab.Modules.Agendas.Application.Submissions;
 using Confab.Modules.Agendas.Domain;
@@ -16,6 +17,11 @@ namespace Confab.Modules.Agendas.Api
         public const string BasePath = "agendas-module";
         public string Name { get; } = "Agendas";
         public string Path => BasePath;
+        
+        public IEnumerable<string> Policies { get; } = new[]
+        {
+            "agendas", "cfp", "submissions"
+        };
         public void Register(IServiceCollection services)
         {
             services.AddDomain()
@@ -27,6 +33,8 @@ namespace Confab.Modules.Agendas.Api
         {
             app.UseModuleRequests()
                 .Subscribe<GetRegularAgendaSlot, RegularAgendaSlotDto>("agendas/slots/regular/get",
+                    (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query))
+                .Subscribe<GetAgenda, IEnumerable<AgendaTrackDto>>("agendas/agendas/get",
                     (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
         }
     }

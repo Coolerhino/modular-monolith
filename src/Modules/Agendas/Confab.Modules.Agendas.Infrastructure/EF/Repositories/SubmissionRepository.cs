@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Repositories
 {
-    public class SubmissionRepository : ISubmissionRepository
+    internal sealed class SubmissionRepository : ISubmissionRepository
     {
         private readonly AgendasDbContext _context;
         private readonly DbSet<Submission> _submissions;
