@@ -15,6 +15,9 @@ using Confab.Shared.Infrastructure.Postgres;
 using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Time;
+using Convey;
+using Convey.CQRS.Events;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -40,6 +43,13 @@ namespace Confab.Services.Tickets.Core
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
             services.AddHostedService<AppInitializer>();
+            
+            services
+                .AddConvey()
+                .AddRabbitMq()
+                .AddEventHandlers()
+                .AddInMemoryEventDispatcher()
+                .Build();
             
             return services
                 .AddScoped<ITicketService, TicketService>()

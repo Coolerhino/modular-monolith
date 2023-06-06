@@ -20,6 +20,8 @@ using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Services;
 //using Confab.Shared.Infrastructure.Storage;
 using Confab.Shared.Infrastructure.Time;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 //using Convey;
 //using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Builder;
@@ -115,6 +117,11 @@ namespace Confab.Shared.Infrastructure
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
 
+            services
+                .AddConvey()
+                .AddRabbitMq()
+                .Build();
+            
             return services;
         }
         

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Confab.Services.Tickets.Core.Entities;
 using Confab.Services.Tickets.Core.Repositories;
-using Confab.Shared.Abstractions.Events;
+using Convey.CQRS.Events;
 using Microsoft.Extensions.Logging;
 
 namespace Confab.Services.Tickets.Core.Events.External.Handlers
