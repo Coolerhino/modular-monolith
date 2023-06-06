@@ -31,7 +31,6 @@ namespace Confab.Modules.Tickets.Core.Services
             _clock = clock;
             _logger = logger;
         }
-        //todo zaimplementuj ticketsaleservice
         public async Task AddAsync(TicketSaleDto dto)
         {
             var conference = await _conferenceRepository.GetAsync(dto.ConferenceId);

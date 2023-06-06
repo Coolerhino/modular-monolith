@@ -14,7 +14,6 @@ namespace Confab.Modules.Conferences.Core.Policies
         }
         public Task<bool> CanDeleteAsync(Conference conference)
         {
-            //todo check participants if any
             var canDelete = _clock.CurrentDate().Date.AddDays(7) < conference.From.Date;
 
             return Task.FromResult(canDelete);
